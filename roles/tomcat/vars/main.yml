@@ -1,4 +1,4 @@
 ---
 # vars file for tomcat
-tomcat_path: tomcat
-webserver: /usr/share/tomcat/webapps/ROOT
+tomcat_path: /usr/share/tomcat/webapps/ROOT
+webserver: tomcat
