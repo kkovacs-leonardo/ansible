@@ -3,26 +3,22 @@
 
 - name: install progresql
   yum:
-#    name: postgresql-server
-    name: postgresql
+    name: postgresql-server
     state: latest
-  
-- name: enable postgresql at boot ?????
-  service:
-    name: postgresql
-    enabled: yes
 
 # only run the next 2 tasks once!
 - name: initilize postgresql
   shell: "postgresql-setup initdb"
 
-- name: initilize postgres some more
-  shell: "chkconfig postgresql on"
+#- name: initilize postgres some more
+#  shell: "chkconfig postgresql on"  
 
+- name: enable postgresql at boot
+  service:
+    name: postgresql.service
+    enabled: yes
 
-
-#- name: start postgresql
-#  service:
-#    name: postgresql.service
-#    name: postgresql.service
-#    state: started      
+- name: start postgresql
+  service:
+    name: postgresql.service
+    state: started      
