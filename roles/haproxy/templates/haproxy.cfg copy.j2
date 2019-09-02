@@ -30,5 +30,7 @@ backend app-servers
     server app{{loop.index}} {{hostvars[host]['inventory_hostname']}}:8080 cookie app{{loop.index}} check
 {% endfor %}
 
-
+{% for host in groups.apps %}
+    server app{{loop.index}} {{hostvars[host]['inventory_hostname']}}:{{ port }} cookie app{{loop.index}} check
+{% endfor %}
 
