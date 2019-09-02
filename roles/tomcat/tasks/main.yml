@@ -20,8 +20,25 @@
     src: index.html.j2
     dest: "{{ tomcat_path }}/index.html"
     mode: 0644
+  notify: reload tomcat  
 
 - name: start tomcat
   service:
     name: "{{ webserver }}"
     state: restarted
+
+# tasks file for apache
+- name: install apache
+  yum:
+    name: httpd
+    state: latest
+          
+- name: enable apache at boot
+  service:
+    name: httpd
+    enabled: yes
+
+- name: start apache
+  service:
+    name: httpd
+    state: started      
