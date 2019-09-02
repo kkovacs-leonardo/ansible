@@ -7,15 +7,14 @@
     name: postgresql
     state: latest
   
-- name: enable apache at boot ?????
+- name: enable postgresql at boot ?????
   service:
     name: postgresql
     enabled: yes
 
 # only run the next 2 tasks once!
-- name: initilize postgres
+- name: initilize postgresql
   shell: "postgresql-setup initdb"
-
 
 - name: initilize postgres some more
   shell: "chkconfig postgresql on"
