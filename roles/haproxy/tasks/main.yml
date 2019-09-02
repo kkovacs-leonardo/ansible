@@ -1,14 +1,14 @@
 ---
 # tasks file for haproxy
 
-- name: install {{ lb_name }}
+- name: install haproxy
   yum:
-    name: "{{ lb_name }}"
+    name: haproxy
     state: latest
 
-- name: enable {{ payload }} at boot
+- name: enable haproxy at boot
   service:
-    name: "{{ lb_name }}"
+    name: haproxy
     enabled: yes
 
 - name: configure haproxy to load balance over app servers
@@ -17,7 +17,7 @@
     dest: /etc/haproxy/haproxy.cfg
     mode: 0644
 
-- name: start {{ lb_name }}
-  service:
-    name: "{{ lb_name }}"
-    state: restarted
+#- name: start haproxy
+#  service:
+#    name: haproxy
+#    state: restarted

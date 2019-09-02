@@ -1,0 +1,53 @@
+---
+# Katalin Kovacs
+
+- name: configuration
+  hosts: all
+  gather_facts: true
+  become: true
+  roles:
+    - role: common
+
+
+- name: deploy haproxy
+  hosts: frontends
+  gather_facts: true
+  become: true
+  roles:
+    - role: haproxy
+
+
+- name: deploy tomcat
+  hosts: apps
+  gather_facts: false
+  become: true
+  roles:
+    - role: tomcat
+
+- name: deploy postgresql
+  hosts: apps
+  gather_facts: false
+  become: true
+  hosts: appdbs
+  roles:
+    - role: postgresql
+  
+
+- name: deploy apache
+  hosts: apps
+  gather_facts: false
+  become: true
+  hosts: apps
+  tasks:
+  - name: install apache
+    yum:
+      name: httpd
+      state: latest
+  - name: enable apache at boot
+    service:
+      name: httpd
+      enabled: yes
+#  - name: start apache
+#    service:
+#      name: httpd
+#      state: started

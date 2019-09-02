@@ -1,3 +1,3 @@
 ---
 # vars file for haproxy
-lb_name: haproxy
+#lb_name: haproxy
